@@ -1,7 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../Redux/Reducers/contactSlice';
 import './ContactList.css';
 
-const ContactList = ({ contacts, onDeleteContact }) => {
+const ContactList = ({ contacts }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul className="contact-list">
       {contacts.map(contact => (
@@ -10,7 +18,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
           <p>Phone: {contact.number}</p>
           <button
             className="button-list"
-            onClick={() => onDeleteContact(contact.id)}
+            onClick={() => handleDeleteContact(contact.id)}
           >
             Delete
           </button>
